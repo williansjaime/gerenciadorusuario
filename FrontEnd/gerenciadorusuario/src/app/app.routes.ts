@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { EditarComponent } from './template/Editar/editar/editar.component';
-import { AdicionarComponent } from './template/Adicionar/adicionar/adicionar.component';
+import { CadastraComponent } from './template/Cadastra/cadastra/cadastra.component';
 
 const routes: Routes = [
-    { path: 'adicionar', component: AdicionarComponent },
+    { path: 'cadastra', component: CadastraComponent },
     { path: 'editar', component: EditarComponent },
    ];
 
