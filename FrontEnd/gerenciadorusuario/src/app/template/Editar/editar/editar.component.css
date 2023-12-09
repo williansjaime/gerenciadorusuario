@@ -1,0 +1,11 @@
+.fixTableHead {
+    overflow-y: auto;
+    height: 700px;
+    max-height: 800px; 
+    overflow-y: auto;
+  }
+
+  .fixTableHead thead th {
+    position: sticky;
+    top: 0;
+  }

@@ -1,8 +1,10 @@
 import csv
 import traceback
-from datetime import datetime,timedelta
+from io import StringIO
 from flask_restful import Resource
+from datetime import datetime,timedelta
 from flask import request,json,jsonify
+
 
 class Editar(Resource):
     '''
@@ -26,16 +28,19 @@ class Editar(Resource):
                 dados_list = []
                 with open('DB/dados.csv', 'r') as arquivo:
                     leitor = csv.reader(arquivo)
-                    for linha in leitor:
-                        if data[0] != json.loads(linha[0].replace("'", '"'))['id']:
-                            print(json.loads(linha[0].replace("'", '"'))['id'])
-                            dados_list[len(dados_list)]=linha[0]
-                    print(len(dados_list))                                
-                    with open('DB/dados.csv', 'w') as arquivo2:
-                        escritor = csv.writer(arquivo2) 
-                        escritor.writerow(dados_list)
+                    dados_list = list(leitor)
+                    arquivo.close()                
                     
-            
+                indice_linha_para_remover = 0 
+                for index in dados_list:
+                    if data[0] == json.loads(index[0].replace("'", '"'))['id']:
+                        dados_list.pop(indice_linha_para_remover)
+                    indice_linha_para_remover += 1
+
+                with open('DB/dados.csv', 'w', newline='') as arquivo:
+                    escritor = csv.writer(arquivo)
+                    escritor.writerows(dados_list)
+                    arquivo.close()
     
     except Exception as err:
         traceback.print_exc()

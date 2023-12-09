@@ -48,7 +48,6 @@ export class CadastraComponent {
     }   
   }
   
-  
   async SalvarUsuario()
   {
     let url:string = API_URL_FLASK+"/api/v1/cadastrousuario";
@@ -57,12 +56,12 @@ export class CadastraComponent {
     {
       if(data)
       {
-        window.alert("Tarefas salvas com sucesso");
+        window.alert("Usuário salvo com sucesso");
         this.user_lista = [];
         this.dados_carregados = false;
         this.GetusuarioLista();
-      }else{
-        window.alert("Erro ao salvas as tarefa");
+      }else{  
+        window.alert("Erro ao salvar usuário");
       }
     }
   }

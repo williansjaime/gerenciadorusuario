@@ -51,26 +51,7 @@ export class EditarComponent {
       window.alert("Erro ao carregar campos!\n Verifique a conexão com internet!!!");    
     }   
   }
-  
-  
-  async SalvarUsuario()
-  {
-    let url:string = API_URL_FLASK+"/api/v1/cadastrousuario";
-    const data = await this.api_usuario_service.POST(url,this.user_lista);
-    if(data!=null)
-    {
-      if(data)
-      {
-        window.alert("Tarefas salvas com sucesso");
-        this.user_lista = [];
-        this.dados_carregados = false;
-        this.GetusuarioLista();
-      }else{
-        window.alert("Erro ao salvas as tarefa");
-      }
-    }
-  }
-
+    
   async DeletarUsuario(id:number){
     this.arry_delete = [];
     let url:string = API_URL_FLASK+"/api/v1/editar";
@@ -80,18 +61,41 @@ export class EditarComponent {
     {
       if(data)
       {
-        window.alert("Tarefas salvas com sucesso");
+        window.alert("Usuário deletado com sucesso");
         this.user_lista = [];
         this.dados_carregados = false;
         this.GetusuarioLista();
       }else{
-        window.alert("Erro ao salvas as tarefa");
+        window.alert("Erro ao deletar usuário");
       }
     }
     if(Array.isArray(this.user_lista)){
       this.user_lista.splice(id, 1); 
       this.numero_linhas--;
     } 
+  }
+
+  Pesquisar() {
+    var input, filter, table, tr, td, cell, i;
+    input = document.getElementById("idUsuario") as HTMLInputElement;
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tableValores") as HTMLInputElement;
+    tr = table.getElementsByTagName("tr") ;
+    // Montar a lista das tag da tabela
+    for (i = 1; i < tr.length; i++) {
+      tr[i].style.display = "none";
+      td = tr[i].getElementsByTagName("td");  
+      //Vai procura so no ID e no nome e sobrenome
+      for (var j = 1; j < 4; j++) { 
+          cell = tr[i].getElementsByTagName("td")[j];
+          if (cell) {
+            if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break;
+            } 
+          }
+      }
+    }
   }
 
 }

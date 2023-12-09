@@ -1,6 +1,5 @@
 import csv
 import traceback
-from datetime import datetime
 from flask_restful import Resource
 from flask import request,json
 
